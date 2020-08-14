@@ -35,7 +35,7 @@ class BaseModel(models.Model):
     visibility = models.CharField(
         max_length=3,
         choices=strings.Constants.VISIBILITY_CHOICES,
-        default=strings.Constants.PRIVATE,
+        default=strings.Constants.PRIVATE
     )
 
     date_added = models.DateTimeField(
