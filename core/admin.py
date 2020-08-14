@@ -39,3 +39,20 @@ class TagAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Tag, SimpleHistoryAdmin)
+
+
+class SeriesAdmin(admin.ModelAdmin):
+    ordering = ['name']
+    search_fields = ['name']
+    readonly_fields = BASE_READONLY_FIELDS
+    fieldsets = (
+        (None, {
+            'fields': BASE_FIELDS,
+        }),
+        ('Other Details', {
+            'fields': BASE_READONLY_FIELDS,
+        }),
+    )
+
+
+admin.site.register(Series, SimpleHistoryAdmin)
