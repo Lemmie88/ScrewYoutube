@@ -1,5 +1,3 @@
-from django.db import models
-
 from core.helpers.helpers import generate_url_code
 from core.models.base import BaseModel
 

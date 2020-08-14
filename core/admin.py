@@ -15,7 +15,7 @@ class PlaylistAdmin(admin.ModelAdmin):
         (None, {
             'fields': BASE_FIELDS,
         }),
-        ('Other Details', {
+        ('Readonly Details', {
             'fields': BASE_READONLY_FIELDS,
         }),
     )
@@ -32,7 +32,7 @@ class TagAdmin(admin.ModelAdmin):
         (None, {
             'fields': BASE_FIELDS,
         }),
-        ('Other Details', {
+        ('Readonly Details', {
             'fields': BASE_READONLY_FIELDS,
         }),
     )
@@ -49,10 +49,30 @@ class SeriesAdmin(admin.ModelAdmin):
         (None, {
             'fields': BASE_FIELDS,
         }),
-        ('Other Details', {
+        ('Readonly Details', {
             'fields': BASE_READONLY_FIELDS,
         }),
     )
 
 
 admin.site.register(Series, SimpleHistoryAdmin)
+
+
+class VideoSeries(admin.ModelAdmin):
+    ordering = ['name']
+    search_fields = ['name']
+    readonly_fields = BASE_READONLY_FIELDS
+    fieldsets = (
+        (None, {
+            'fields': BASE_FIELDS,
+        }),
+        ('Other Details', {
+            'fields': ('link', 'series', 'playlist', 'tag'),
+        }),
+        ('Readonly Details', {
+            'fields': BASE_READONLY_FIELDS,
+        }),
+    )
+
+
+admin.site.register(Video, SimpleHistoryAdmin)

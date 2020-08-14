@@ -28,8 +28,8 @@ class BaseModel(models.Model):
 
     description = models.TextField(
         verbose_name='Description',
-        blank=True,
-        null=True
+        null=True,
+        blank=True
     )
 
     visibility = models.CharField(
