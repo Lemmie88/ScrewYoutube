@@ -5,7 +5,7 @@ from core.models.base import BaseModel
 
 
 class Tag(BaseModel):
-    image = models.FileField(
+    image = models.ImageField(
         verbose_name='Image',
         null=True,
         blank=True

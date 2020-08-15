@@ -14,7 +14,7 @@ class Thumbnail(models.Model):
         verbose_name='Position'
     )
 
-    image = models.FileField(
+    image = models.ImageField(
         verbose_name='Image',
         null=True,
         blank=True
