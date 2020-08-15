@@ -10,3 +10,6 @@
 
 # Ignore database.
 db.sqlite3
+
+# Ignore media files.
+media

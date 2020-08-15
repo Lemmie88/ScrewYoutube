@@ -7,13 +7,15 @@ class Constants:
         (PUBLIC, 'Public'),
     ]
 
-    UPLOADING = 'UPL'
+    NEW = 'NEW'
     PROCESSING = 'PRO'
+    UPLOADING = 'UPL'
     READY = 'REA'
 
     VIDEO_STATUS_CHOICES = [
-        (UPLOADING, 'Uploading'),
+        (NEW, 'New'),
         (PROCESSING, 'Processing'),
+        (UPLOADING, 'Uploading'),
         (READY, 'Ready'),
     ]
 
