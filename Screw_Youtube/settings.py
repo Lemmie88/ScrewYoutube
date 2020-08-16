@@ -1,6 +1,9 @@
 import os
 from pathlib import Path
+
 from decouple import config
+from google.cloud.storage.constants import *
+from google.oauth2 import service_account
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
@@ -14,6 +17,17 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
+# Google Cloud.
+DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+
+GS_BUCKET_NAME = config('GS_BUCKET_NAME')
+GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
+    config('GS_CREDENTIALS')
+)
+DEFAULT_STORAGE_CLASS = STANDARD_STORAGE_CLASS
+DELETE_UPLOADED_VIDEO = False
+BACKUP_VIDEO = False
+
 ALLOWED_HOSTS = []
 
 # Application definition
@@ -25,7 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Link: https://django-simple-history.readthedocs.io/en/latest/
     'simple_history',
+    # Link: https://django-storages.readthedocs.io/en/latest/
+    'storages',
     'core',
 ]
 
@@ -110,3 +127,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+TEMP_ROOT = os.path.join(BASE_DIR, 'temp')

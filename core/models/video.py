@@ -1,42 +1,46 @@
 import datetime
 import os
+import shutil
 import subprocess
 
 import ffmpeg
+from django.core.files.storage import FileSystemStorage
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-from Screw_Youtube.settings import MEDIA_ROOT
+from Screw_Youtube import settings
 from core import strings, scheduler
 from core.helpers.helpers import generate_url_code
-from core.models import Series, Playlist, Tag
-from core.models.base import BaseModel
+from core.helpers.storage import upload_file
+from core.models import BaseModel, Series, Playlist, Tag
 
-TO_BE_PROCESSED_DIR = os.path.join(MEDIA_ROOT, 'videos', 'to-be-processed')
-PROCESSING_DIR = os.path.join(MEDIA_ROOT, 'videos', 'processing')
+VIDEO_DIR = os.path.join(settings.TEMP_ROOT, 'videos')
+ORIGINAL_DIR = os.path.join(VIDEO_DIR, 'original')
+PROCESSING_DIR = os.path.join(VIDEO_DIR, 'processing')
 
 
 def update_filename(instance, filename):
-    f"""
+    """
     This function changes the filename of the video to <video id>.<extension>.
     :param instance: Instance of the video model
     :param filename: Original filename
     """
     _, file_extension = os.path.splitext(filename)
-    filename = str(instance.id) + file_extension
-    return os.path.join(TO_BE_PROCESSED_DIR, filename)
+    return str(instance.id) + file_extension
 
 
 class Video(BaseModel):
-    link = models.URLField(
+    video = models.FileField(
+        verbose_name='Video',
+        upload_to=update_filename,
+        storage=FileSystemStorage(location=ORIGINAL_DIR),
         null=True,
         blank=True
     )
 
-    video = models.FileField(
-        verbose_name='Video',
-        upload_to=update_filename,
+    public_url = models.URLField(
+        verbose_name='Public URL',
         null=True,
         blank=True
     )
@@ -51,6 +55,13 @@ class Video(BaseModel):
         max_length=3,
         choices=strings.Constants.VIDEO_STATUS_CHOICES,
         default=strings.Constants.NEW
+    )
+
+    link = models.URLField(
+        verbose_name='Link',
+        help_text='For example, this can be the IMDB page URL of the video.',
+        null=True,
+        blank=True
     )
 
     series = models.ForeignKey(
@@ -88,12 +99,19 @@ class Video(BaseModel):
         self.duration = datetime.timedelta(seconds=float(result.stdout))
         self.save()
 
+    def update_public_url(self, url):
+        """
+        This function updates the public url of video.
+        """
+        self.public_url = url
+        self.save()
+
     def convert_to_hls(self):
         """
         This function converts the video to HLS format which makes streaming possible.
         """
         path = self.video.path
-        output_dir = os.path.join(PROCESSING_DIR, str(self.id) + '\\')
+        output_dir = self.get_processing_dir()
         filename = os.path.join(output_dir, 'video.m3u8')
 
         # Make directory to prevent error.
@@ -113,14 +131,14 @@ class Video(BaseModel):
     def generate_thumbnails(self, width=640):
         """
         This function generates thumbnails associated with the video. At 10%, 20%, 30% ... 90% of the video, a
-        thumbnail with 640px width is generated. For each thumbnail, a Thumbnail instance is generated.
+        thumbnail with 640px width is generated.
         """
-        from core.models import Thumbnail
+        self.delete_thumbnails()
 
         if self.duration is None:
             self.update_video_duration()
 
-        output_dir = os.path.join(PROCESSING_DIR, str(self.id), 'thumbnails')
+        output_dir = self.get_processing_dir(thumbnails=True)
 
         # Make directory to prevent error.
         if not os.path.isdir(output_dir):
@@ -140,9 +158,40 @@ class Video(BaseModel):
                 .output(filename, vframes=1) \
                 .run()
 
-            Thumbnail.objects.create(video=self, position=index, image=filename)
-
             index += 1
+
+    def upload_hls_video(self):
+        """
+        This function uploads the video in HLS format to Google Cloud.
+        """
+        remote_location = self.get_remote_storage_dir()
+        for filename in os.listdir(self.get_processing_dir()):
+            if filename.endswith('.m3u8') or filename.endswith('.ts'):
+                file_path = os.path.join(self.get_processing_dir(), filename)
+                public_url = upload_file(filename, file_path, remote_location)
+
+                if filename.endswith('.m3u8'):
+                    self.update_public_url(public_url)
+
+    def upload_thumbnails(self):
+        """
+        This function uploads the thumbnails to Google Cloud.
+        """
+        from core.models import Thumbnail
+
+        remote_location = self.get_remote_storage_dir(thumbnails=True)
+        thumbnails_dir = self.get_processing_dir(thumbnails=True)
+
+        for filename in os.listdir(thumbnails_dir):
+            if filename.endswith('.png') or filename.endswith('.jpg'):
+                file_path = os.path.join(thumbnails_dir, filename)
+                public_url = upload_file(filename, file_path, remote_location)
+
+                position = os.path.splitext(filename)[0]
+                Thumbnail.objects.create(video=self, position=position, public_url=public_url)
+
+    def delete_temp_files(self):
+        shutil.rmtree(self.get_processing_dir())
 
     def delete_thumbnails(self):
         """
@@ -171,6 +220,28 @@ class Video(BaseModel):
         """
         self.status = strings.Constants.READY
         self.save()
+
+    def get_processing_dir(self, thumbnails=False):
+        """
+        Get the directory that contains the video in HLS format and thumbnails.
+        If thumbnails is True, it will return the location for thumbnails instead.
+        """
+        if thumbnails:
+            return os.path.join(PROCESSING_DIR, str(self.id), 'thumbnails')
+
+        return os.path.join(PROCESSING_DIR, str(self.id))
+
+    def get_remote_storage_dir(self, thumbnails=False):
+        """
+        This is the location where the video is stored in at Google Cloud.
+        If thumbnail is True, it will return the location for thumbnails instead.
+        """
+        path = 'videos/' + str(self.id)
+
+        if thumbnails is True:
+            path += '/thumbnails'
+
+        return 'debug/' + path if settings.DEBUG else path
 
     def clean(self):
         # Generate unique url code.
