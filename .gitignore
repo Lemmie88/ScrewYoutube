@@ -12,8 +12,8 @@
 db.sqlite3
 
 # Ignore media and temp folder.
-media/*
-temp/*
+media
+temp
 
 # Ignore credentials file from Google Cloud.
 credentials.json

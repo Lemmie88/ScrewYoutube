@@ -7,7 +7,7 @@ BASE_FIELDS = ('name', 'description', 'visibility')
 BASE_READONLY_FIELDS = ('date_added', 'date_modified', 'url', 'id')
 
 
-class PlaylistAdmin(admin.ModelAdmin):
+class PlaylistAdmin(SimpleHistoryAdmin):
     ordering = ['name']
     search_fields = ['name']
     readonly_fields = BASE_READONLY_FIELDS
@@ -21,10 +21,10 @@ class PlaylistAdmin(admin.ModelAdmin):
     )
 
 
-admin.site.register(Playlist, SimpleHistoryAdmin)
+admin.site.register(Playlist, PlaylistAdmin)
 
 
-class TagAdmin(admin.ModelAdmin):
+class TagAdmin(SimpleHistoryAdmin):
     ordering = ['name']
     search_fields = ['name']
     readonly_fields = BASE_READONLY_FIELDS
@@ -38,10 +38,10 @@ class TagAdmin(admin.ModelAdmin):
     )
 
 
-admin.site.register(Tag, SimpleHistoryAdmin)
+admin.site.register(Tag, TagAdmin)
 
 
-class SeriesAdmin(admin.ModelAdmin):
+class SeriesAdmin(SimpleHistoryAdmin):
     ordering = ['name']
     search_fields = ['name']
     readonly_fields = BASE_READONLY_FIELDS
@@ -55,10 +55,27 @@ class SeriesAdmin(admin.ModelAdmin):
     )
 
 
-admin.site.register(Series, SimpleHistoryAdmin)
+admin.site.register(Series, SeriesAdmin)
 
 
-class VideoSeries(admin.ModelAdmin):
+class ThumbnailAdmin(SimpleHistoryAdmin):
+    ordering = ['video', 'position']
+    search_fields = ['video__name']
+    readonly_fields = ('id',)
+    fieldsets = (
+        (None, {
+            'fields': ('video', 'position', 'public_url',),
+        }),
+        ('Readonly Details', {
+            'fields': ('id',),
+        }),
+    )
+
+
+admin.site.register(Thumbnail, ThumbnailAdmin)
+
+
+class VideoAdmin(SimpleHistoryAdmin):
     ordering = ['name']
     search_fields = ['name']
     readonly_fields = BASE_READONLY_FIELDS
@@ -67,7 +84,7 @@ class VideoSeries(admin.ModelAdmin):
             'fields': BASE_FIELDS,
         }),
         ('Other Details', {
-            'fields': ('link', 'series', 'playlist', 'tag'),
+            'fields': ('public_url', 'duration', 'status', 'link', 'series', 'playlist', 'tag'),
         }),
         ('Readonly Details', {
             'fields': BASE_READONLY_FIELDS,
@@ -75,4 +92,4 @@ class VideoSeries(admin.ModelAdmin):
     )
 
 
-admin.site.register(Video, SimpleHistoryAdmin)
+admin.site.register(Video, VideoAdmin)
