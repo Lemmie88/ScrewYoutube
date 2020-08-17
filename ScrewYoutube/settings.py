@@ -57,7 +57,7 @@ MIDDLEWARE = [
     'simple_history.middleware.HistoryRequestMiddleware',
 ]
 
-ROOT_URLCONF = 'Screw_Youtube.urls'
+ROOT_URLCONF = 'ScrewYoutube.urls'
 
 TEMPLATES = [
     {
@@ -75,7 +75,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'Screw_Youtube.wsgi.application'
+WSGI_APPLICATION = 'ScrewYoutube.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases

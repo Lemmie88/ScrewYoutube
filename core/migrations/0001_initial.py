@@ -78,7 +78,7 @@ class Migration(migrations.Migration):
                 ('date_added', models.DateTimeField(auto_now_add=True, verbose_name='Date added')),
                 ('date_modified', models.DateTimeField(auto_now=True, verbose_name='Date modified')),
                 ('link', models.URLField(blank=True, null=True)),
-                ('video', models.FileField(blank=True, null=True, storage=django.core.files.storage.FileSystemStorage(location='C:\\Users\\Lemuel\\Projects\\Screw_Youtube\\temp\\videos\\original'), upload_to=core.models.video.update_filename, verbose_name='Video')),
+                ('video', models.FileField(blank=True, null=True, storage=django.core.files.storage.FileSystemStorage(location='C:\\Users\\Lemuel\\Projects\\ScrewYoutube\\temp\\videos\\original'), upload_to=core.models.video.update_filename, verbose_name='Video')),
                 ('duration', models.DurationField(blank=True, null=True, verbose_name='Duration')),
                 ('status', models.CharField(choices=[('NEW', 'New'), ('PRO', 'Processing'), ('UPL', 'Uploading'), ('REA', 'Ready')], default='NEW', max_length=3)),
                 ('playlist', models.ManyToManyField(blank=True, to='core.Playlist', verbose_name='Playlist')),
