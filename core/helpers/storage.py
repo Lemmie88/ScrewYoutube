@@ -3,7 +3,7 @@ import os
 from decouple import config
 from google.cloud import storage
 
-from Screw_Youtube.settings import GS_BUCKET_NAME
+from ScrewYoutube.settings import GS_BUCKET_NAME
 
 
 def get_client():

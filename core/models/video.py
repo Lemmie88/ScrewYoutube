@@ -9,7 +9,7 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-from Screw_Youtube import settings
+from ScrewYoutube import settings
 from core import strings, scheduler
 from core.helpers.helpers import generate_url_code
 from core.helpers.storage import upload_file

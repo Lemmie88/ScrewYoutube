@@ -2,7 +2,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 
-from Screw_Youtube import settings
+from ScrewYoutube import settings
 
 urlpatterns = [
     path('', admin.site.urls),
