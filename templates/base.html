@@ -1,0 +1,21 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Screw Youtube</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <link rel="stylesheet" href="{% static 'libraries/bootstrap/css/cyborg-bootstrap.min.css' %}">
+    {% block head %} {% endblock %}
+</head>
+<body>
+{% include 'navbar.html' %}
+{% block body %} {% endblock %}
+
+<script src="{% static 'libraries/jquery.min.js' %}"></script>
+<script src="{% static 'libraries/popper.min.js' %}"></script>
+<script src="{% static 'libraries/bootstrap/js/bootstrap.min.js' %}"></script>
+</body>
+</html>
