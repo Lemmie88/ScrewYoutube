@@ -1,2 +1,3 @@
-from .constants import Constants
-from .pages import Pages
+from .constant import Constant
+from .form import Form
+from .page import Page

@@ -1,12 +1,12 @@
 from django.shortcuts import render
 
-from core.helpers.helpers import get_context
-from core.strings.pages import Pages
+from core.helpers.helper import get_context
+from core.strings.page import Page
 
 
 def index(request):
     """
     This function renders the videos page.
     """
-    context = get_context(Pages.VIDEOS)
+    context = get_context(Page.VIDEOS)
     return render(request, 'base.html', context)

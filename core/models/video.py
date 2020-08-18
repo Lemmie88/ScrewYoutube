@@ -3,16 +3,18 @@ import os
 import shutil
 import subprocess
 
+# noinspection PyPackageRequirements
 import ffmpeg
 from django.core.files.storage import FileSystemStorage
 from django.db import models
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, pre_delete
 from django.dispatch import receiver
 
 from ScrewYoutube import settings
 from core import strings, scheduler
-from core.helpers.helpers import generate_url_code
-from core.helpers.storage import upload_file
+from core.helpers.helper import generate_url_code
+from core.helpers.storage import upload_file, delete_folder
+from core.helpers.form import Form
 from core.models import BaseModel, Series, Playlist, Tag
 
 VIDEO_DIR = os.path.join(settings.TEMP_ROOT, 'videos')
@@ -53,8 +55,8 @@ class Video(BaseModel):
 
     status = models.CharField(
         max_length=3,
-        choices=strings.Constants.VIDEO_STATUS_CHOICES,
-        default=strings.Constants.NEW
+        choices=strings.Constant.VIDEO_STATUS_CHOICES,
+        default=strings.Constant.NEW
     )
 
     link = models.URLField(
@@ -87,6 +89,15 @@ class Video(BaseModel):
     class Meta:
         ordering = ["name"]
         get_latest_by = ["-date_added"]
+
+    def update_details(self, cleaned_data):
+        """
+        This function updates the video details from the form.
+        """
+        print(cleaned_data)
+        self.name = Form.get_title(cleaned_data)
+        self.description = Form.get_description(cleaned_data)
+        self.save()
 
     def update_video_duration(self):
         """
@@ -204,21 +215,21 @@ class Video(BaseModel):
         """
         This function changes the status of the video to processing.
         """
-        self.status = strings.Constants.PROCESSING
+        self.status = strings.Constant.PROCESSING
         self.save()
 
     def is_uploading(self):
         """
         This function changes the status of the video to uploading.
         """
-        self.status = strings.Constants.UPLOADING
+        self.status = strings.Constant.UPLOADING
         self.save()
 
     def is_ready(self):
         """
         This function changes the status of the video to ready.
         """
-        self.status = strings.Constants.READY
+        self.status = strings.Constant.READY
         self.save()
 
     def get_processing_dir(self, thumbnails=False):
@@ -253,3 +264,12 @@ class Video(BaseModel):
 @receiver(post_save, sender=Video)
 def process_video(sender, instance, **kwargs):
     scheduler.run()
+
+
+# noinspection PyUnusedLocal
+@receiver(pre_delete, sender=Video)
+def delete_video(sender, instance, **kwargs):
+    """
+    This function deletes the video folder from the server.
+    """
+    delete_folder(instance.get_remote_storage_dir())
