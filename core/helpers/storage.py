@@ -1,6 +1,6 @@
-import os
-
+# noinspection PyPackageRequirements
 from decouple import config
+# noinspection PyPackageRequirements
 from google.cloud import storage
 
 from ScrewYoutube.settings import GS_BUCKET_NAME
@@ -19,6 +19,6 @@ def upload_file(filename, file_path, remote_location):
     """
     storage_client = get_client()
     bucket = storage_client.bucket(GS_BUCKET_NAME)
-    blob = bucket.blob(os.path.join(remote_location, filename))
+    blob = bucket.blob(remote_location + '/' + filename)
     blob.upload_from_filename(file_path)
     return blob.public_url

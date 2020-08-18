@@ -8,14 +8,27 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
     <link rel="stylesheet" href="{% static 'libraries/bootstrap/css/cyborg-bootstrap.min.css' %}">
+
+    <!-- Video JS css files. -->
+    <link rel="stylesheet" href="{% static 'libraries/videojs/css/video-js.min.css' %}"/>
+    <script src="{% static 'libraries/videojs/js/videojs-ie8.min.js' %}"></script>
     {% block head %} {% endblock %}
 </head>
 <body>
 {% include 'navbar.html' %}
-{% block body %} {% endblock %}
+
+<div class="container mt-5 mb-5">
+    {% block body %} {% endblock %}
+</div>
 
 <script src="{% static 'libraries/jquery.min.js' %}"></script>
 <script src="{% static 'libraries/popper.min.js' %}"></script>
 <script src="{% static 'libraries/bootstrap/js/bootstrap.min.js' %}"></script>
+
+<!-- Video JS -->
+<script src="{% static 'libraries/videojs/js/video.min.js' %}"></script>
+{#<script src="{% static 'libraries/videojs/js/videojs-http-streaming.min.js' %}"></script>#}
+
+{% block script %} {% endblock %}
 </body>
 </html>

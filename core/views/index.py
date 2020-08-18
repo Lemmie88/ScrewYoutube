@@ -1,8 +1,12 @@
-from django.http import HttpResponse
-from django.template import loader
+from django.shortcuts import render
+
+from core.helpers.helpers import get_context
+from core.strings.pages import Pages
 
 
 def index(request):
-    context = {}
-    template = loader.get_template('base.html')
-    return HttpResponse(template.render(context, request))
+    """
+    This function renders the videos page.
+    """
+    context = get_context(Pages.VIDEOS)
+    return render(request, 'base.html', context)
