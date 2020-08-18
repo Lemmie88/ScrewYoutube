@@ -25,3 +25,7 @@ def generate_url_code(model_class, length=LENGTH) -> str:
         code = generate_code(length)
         if model_class.objects.filter(url=code).exists() is False:
             return code
+
+
+def get_context(page: strings.Pages):
+    return {'strings': strings, 'page': page}
