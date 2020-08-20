@@ -13,3 +13,8 @@ function calculateVideoHeight() {
     video.height(video.width() / 16 * 9)
     video.closest('div').height(video.height())
 }
+
+function editVideo() {
+    let url = window.location.pathname + 'edit/'
+    redirectToUrl(url)
+}

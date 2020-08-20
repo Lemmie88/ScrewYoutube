@@ -11,6 +11,10 @@
     max-width: 700px;
 }
 
+.max-width-960 {
+    max-width: 960px;
+}
+
 /* Form elements */
 .invalid-feedback {
     font-size: 100% !important;
@@ -40,4 +44,9 @@
     .toast {
         max-width: 100% !important;
     }
+}
+
+/* Video element */
+.video-js {
+    max-width: 100%;
 }

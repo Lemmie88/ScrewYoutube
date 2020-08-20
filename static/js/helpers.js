@@ -6,6 +6,19 @@ function redirectToIndex() {
 }
 
 /**
+ * This function redirects user to the selected url.
+ * @param url Url to redirect user to
+ * @param newTab If true, the user will be redirected to a new tab
+ */
+function redirectToUrl(url, newTab=false) {
+    if (newTab) {
+        window.open(url,"_blank")
+        return
+    }
+    window.open(url,"_self")
+}
+
+/**
  * This function displays a toast.
  * @param title Title of the toast
  * @param message Message of the toast
