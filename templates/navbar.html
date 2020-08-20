@@ -1,6 +1,6 @@
 <!--suppress ALL -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Screw Youtube</a>
+    <a class="navbar-brand" href="/">Screw Youtube</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -21,11 +21,11 @@
                 <a class="nav-link" href="/tags/">Tags</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link disabled" href="#">Upload</a>
+                <a class="nav-link" href="/upload/">Upload</a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-                   aria-expanded="false">Settings</a>
+                <a class="nav-link disabled dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                   aria-haspopup="true" aria-expanded="false">Settings</a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="#">Profile</a>
                     <a class="dropdown-item" href="#">Website Settings</a>
@@ -35,7 +35,15 @@
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <div class="form-group mr-2">
+                <select class="form-control">
+                    <option>Videos</option>
+                    <option>Playlists</option>
+                    <option>Series</option>
+                    <option>Tags</option>
+                </select>
+            </div>
+            <input class="form-control mr-sm-2 min-width-250" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
         </form>
     </div>

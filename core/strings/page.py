@@ -6,3 +6,5 @@ class Page:
     TAGS = 'tags'
     TAG = 'tag'
     EDIT_TAG = 'edit tag'
+
+    UPLOAD = 'upload'

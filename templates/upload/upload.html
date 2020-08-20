@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+    <div class="mx-auto max-width-700">
+        <h3>Upload</h3>
+        <form id="upload" action="{% url 'core:upload' %}" class="dropzone" enctype="multipart/form-data">
+            {% csrf_token %}
+        </form>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'js/upload/upload.js' %}"></script>
+{% endblock %}

@@ -14,4 +14,6 @@ urlpatterns = [
     path('video/<str:url>/<str:action>/', video, name='video'),
 
     path('tags/', tags, name='tags'),
+
+    path('upload/', upload, name='upload'),
 ]
