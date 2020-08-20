@@ -14,8 +14,8 @@ def process_video():
     from core.models import Video
 
     while True:
-        while Video.objects.filter(status=strings.Constants.NEW).exists():
-            for video in Video.objects.filter(status=strings.Constants.NEW):
+        while Video.objects.filter(status=strings.Constant.NEW).exists():
+            for video in Video.objects.filter(status=strings.Constant.NEW):
                 video.is_processing()
                 video.update_video_duration()
                 video.generate_thumbnails()
@@ -32,8 +32,8 @@ def upload_video():
     from core.models import Video
 
     while True:
-        while Video.objects.filter(status=strings.Constants.UPLOADING).exists():
-            for video in Video.objects.filter(status=strings.Constants.UPLOADING):
+        while Video.objects.filter(status=strings.Constant.UPLOADING).exists():
+            for video in Video.objects.filter(status=strings.Constant.UPLOADING):
                 video.upload_hls_video()
                 video.upload_thumbnails()
                 video.delete_temp_files()

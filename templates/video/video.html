@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+    <div class="mx-auto max-width-960">
+        <video id="video" class="video-js vjs-default-skin w-100" controls>
+            <source src="{{ video.public_url }}"
+                    type="application/x-mpegURL">
+        </video>
+        <h4 id="title" class="mt-3">{{ video.name }}</h4>
+        <p id="description">{{ video.description }}</p>
+        <button type="button" class="btn btn-primary" onclick="editVideo()">Edit</button>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'js/video/video.js' %}"></script>
+{% endblock %}

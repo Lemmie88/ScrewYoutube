@@ -1,2 +1,2 @@
-from .index import index
-from .video import video
+from .index import *
+from .video import *

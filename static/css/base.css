@@ -1,0 +1,52 @@
+/* Max widths */
+.max-width-600 {
+    max-width: 600px;
+}
+
+.max-width-650 {
+    max-width: 650px;
+}
+
+.max-width-700 {
+    max-width: 700px;
+}
+
+.max-width-960 {
+    max-width: 960px;
+}
+
+/* Form elements */
+.invalid-feedback {
+    font-size: 100% !important;
+}
+
+/* Toast */
+.toast-container {
+    position: absolute;
+    top: 3rem;
+    right: 3rem;
+    min-width: 300px;
+    z-index: 1000;
+}
+
+.toast {
+    max-width: 350px;
+}
+
+@media (max-width: 576px) {
+    .toast-container {
+        width: 100%;
+        bottom: 0;
+        top: initial;
+        right: initial;
+    }
+
+    .toast {
+        max-width: 100% !important;
+    }
+}
+
+/* Video element */
+.video-js {
+    max-width: 100%;
+}

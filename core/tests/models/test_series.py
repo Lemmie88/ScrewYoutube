@@ -14,7 +14,7 @@ class SeriesTestCase(TestCase):
         code = Series.objects.get(name="Test 1").url
 
         # Assert.
-        self.assertEqual(len(code), strings.Constants.DEFAULT_CODE_LENGTH)
+        self.assertEqual(len(code), strings.Constant.DEFAULT_CODE_LENGTH)
 
     def test_url_is_unique(self):
         # Arrange.

@@ -16,7 +16,7 @@ class BaseModel(models.Model):
 
     url = models.CharField(
         verbose_name='URL',
-        max_length=strings.Constants.DEFAULT_CODE_LENGTH,
+        max_length=strings.Constant.DEFAULT_CODE_LENGTH,
         unique=True,
         editable=False
     )
@@ -34,8 +34,8 @@ class BaseModel(models.Model):
 
     visibility = models.CharField(
         max_length=3,
-        choices=strings.Constants.VISIBILITY_CHOICES,
-        default=strings.Constants.PRIVATE
+        choices=strings.Constant.VISIBILITY_CHOICES,
+        default=strings.Constant.PRIVATE
     )
 
     date_added = models.DateTimeField(

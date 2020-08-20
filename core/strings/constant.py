@@ -1,4 +1,4 @@
-class Constants:
+class Constant:
     PRIVATE = 'PRI'
     PUBLIC = 'PUB'
 
@@ -21,3 +21,5 @@ class Constants:
 
     # This is the length of the url code.
     DEFAULT_CODE_LENGTH = 10
+
+    SUCCESS = {'status': 'ok'}

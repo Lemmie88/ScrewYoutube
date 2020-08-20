@@ -2,8 +2,9 @@ import random
 import string
 
 import core.strings as strings
+from ScrewYoutube import settings
 
-LENGTH = strings.Constants.DEFAULT_CODE_LENGTH
+LENGTH = strings.Constant.DEFAULT_CODE_LENGTH
 
 
 def generate_code(length=LENGTH) -> str:
@@ -27,5 +28,5 @@ def generate_url_code(model_class, length=LENGTH) -> str:
             return code
 
 
-def get_context(page: strings.Pages):
-    return {'strings': strings, 'page': page}
+def get_context(page: strings.Page):
+    return {'debug': settings.DEBUG, 'strings': strings, 'page': page}
