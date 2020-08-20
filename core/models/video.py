@@ -92,12 +92,13 @@ class Video(BaseModel):
 
     def update_details(self, cleaned_data):
         """
-        This function updates the video details from the form.
+        This function updates the video details from the form and removes the new video tag.
         """
-        print(cleaned_data)
         self.name = Form.get_title(cleaned_data)
         self.description = Form.get_description(cleaned_data)
         self.save()
+
+        self.remove_new_video_tag()
 
     def update_video_duration(self):
         """
@@ -211,6 +212,18 @@ class Video(BaseModel):
         from core.models.thumbnail import Thumbnail
         Thumbnail.objects.filter(video=self).delete()
 
+    def remove_new_video_tag(self):
+        """
+        This function removes the "new video" tag from the video instance.
+        """
+        try:
+            tag = Tag.objects.get(strings.Constant.NEW_VIDEO)
+            self.tag.remove(tag)
+            self.save()
+
+        except Tag.DoesNotExist:
+            pass
+
     def is_processing(self):
         """
         This function changes the status of the video to processing.
@@ -262,8 +275,14 @@ class Video(BaseModel):
 
 # noinspection PyUnusedLocal
 @receiver(post_save, sender=Video)
-def process_video(sender, instance, **kwargs):
+def process_video(sender, instance, created, **kwargs):
+    assert isinstance(instance, Video)
     scheduler.run()
+
+    if created:
+        tag = Tag.objects.get_or_create(strings.Constant.NEW_VIDEO)
+        instance.tag.add(tag)
+        instance.save()
 
 
 # noinspection PyUnusedLocal

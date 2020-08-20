@@ -1,6 +1,7 @@
 # noinspection PyPackageRequirements
 import threading
 
+# noinspection PyPackageRequirements
 from decouple import config
 # noinspection PyPackageRequirements
 from google.cloud import storage
