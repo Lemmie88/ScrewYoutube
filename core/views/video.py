@@ -7,6 +7,14 @@ from core.helpers.helper import get_context
 from core.models import Video
 
 
+def videos(request):
+    """
+    This function renders the videos page.
+    """
+    context = get_context(strings.Page.VIDEOS)
+    return render(request, 'base.html', context)
+
+
 def video(request, url, action=None):
     """
     This function renders the video page.
