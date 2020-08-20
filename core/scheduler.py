@@ -1,6 +1,7 @@
 import threading
 import time
 
+from ScrewYoutube import settings
 from core import strings
 
 TIMEOUT = 60
@@ -46,6 +47,10 @@ def run():
     """
     This function ensures that only one instance of each thread is running at any time.
     """
+    # Suppress threading during testing.
+    if settings.TESTING:
+        return
+
     is_thread_alive = False
     for thread in threading.enumerate():
         if thread.name == THREAD_NAMES[0]:

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+    <div class="mx-auto max-width-700">
+        <h3 style="padding-left: 5px;">Tags</h3>
+
+        {% for tag in tags %}
+            <div class="d-inline-block tag" onclick="clickTag('{{ tag.url }}')" style="background-color: {{ tag.colour }}">
+                {{ tag.name }}&nbsp;&nbsp;&nbsp;{{ tag.get_number_of_videos }}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'js/tag/tags.js' %}"></script>
+{% endblock %}

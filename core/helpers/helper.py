@@ -1,6 +1,8 @@
 import random
 import string
 
+from faker import Faker
+
 import core.strings as strings
 from ScrewYoutube import settings
 
@@ -28,5 +30,16 @@ def generate_url_code(model_class, length=LENGTH) -> str:
             return code
 
 
+def random_colour():
+    """
+    This function generates a random bright colour.
+    """
+    fake = Faker()
+    return fake.color(luminosity='bright')
+
+
 def get_context(page: strings.Page):
+    """
+    This function returns the base context required for all pages.
+    """
     return {'debug': settings.DEBUG, 'strings': strings, 'page': page}
