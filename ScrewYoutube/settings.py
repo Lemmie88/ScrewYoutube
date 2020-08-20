@@ -1,8 +1,12 @@
 import os
+import sys
 from pathlib import Path
 
+# noinspection PyPackageRequirements
 from decouple import config
+# noinspection PyPackageRequirements
 from google.cloud.storage.constants import *
+# noinspection PyPackageRequirements
 from google.oauth2 import service_account
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -16,6 +20,8 @@ SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
+
+TESTING = sys.argv[1:2] == ['test']
 
 # Google Cloud.
 DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'

@@ -10,4 +10,6 @@ urlpatterns = [
     path('video/<str:url>/edit/', edit_video, name='edit_video'),
     path('video/<str:url>/delete/', delete_video, name='delete_video'),
     path('video/<str:url>/<str:action>/', video, name='video'),
+
+    path('tags/', tags, name='tags'),
 ]

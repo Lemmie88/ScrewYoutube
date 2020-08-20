@@ -32,6 +32,9 @@ class TagAdmin(SimpleHistoryAdmin):
         (None, {
             'fields': BASE_FIELDS,
         }),
+        ('Other Fields', {
+            'fields': ('colour',),
+        }),
         ('Readonly Details', {
             'fields': BASE_READONLY_FIELDS,
         }),
