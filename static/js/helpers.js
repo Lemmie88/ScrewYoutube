@@ -19,6 +19,14 @@ function redirectToUrl(url, newTab=false) {
 }
 
 /**
+ * This function updates the navbar by checking the page against the href attribute and add the "active" class.
+ * @param page Current page
+ */
+function updateNavbar(page) {
+    $('.nav-link[href*="' + page + '"]').closest('.nav-item').addClass('active')
+}
+
+/**
  * This function displays a toast.
  * @param title Title of the toast
  * @param message Message of the toast
