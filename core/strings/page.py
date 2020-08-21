@@ -8,3 +8,4 @@ class Page:
     EDIT_TAG = 'edit tag'
 
     UPLOAD = 'upload'
+    UPLOAD_STATUS = 'upload status'

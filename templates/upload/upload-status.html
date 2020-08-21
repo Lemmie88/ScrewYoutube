@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+    <div class="mx-auto max-width-700">
+        <h4>Upload Status</h4>
+        {% include 'video/video-list.html' %}
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'js/upload/upload-status.js' %}"></script>
+{% endblock %}

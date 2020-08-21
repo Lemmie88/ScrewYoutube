@@ -211,13 +211,14 @@ class Video(BaseModel):
         """
         from core.models.thumbnail import Thumbnail
         Thumbnail.objects.filter(video=self).delete()
+        shutil.rmtree(self.get_processing_dir(thumbnails=True))
 
     def remove_new_video_tag(self):
         """
         This function removes the "new video" tag from the video instance.
         """
         try:
-            tag = Tag.objects.get(strings.Constant.NEW_VIDEO)
+            tag = Tag.objects.get(name=strings.Constant.NEW_VIDEO)
             self.tag.remove(tag)
             self.save()
 
@@ -287,7 +288,7 @@ def process_video(sender, instance, created, **kwargs):
     scheduler.run()
 
     if created:
-        tag = Tag.objects.get_or_create(strings.Constant.NEW_VIDEO)
+        tag = Tag.objects.get_or_create(name=strings.Constant.NEW_VIDEO)[0]
         instance.tag.add(tag)
         instance.save()
 

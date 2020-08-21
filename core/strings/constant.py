@@ -26,4 +26,4 @@ class Constant:
     SUCCESS = {'status': 'ok'}
 
     # This is the tag used to identify new videos. After the user edits the video details, the tag is removed.
-    NEW_VIDEO = 'New'
+    NEW_VIDEO = 'New Uploads'

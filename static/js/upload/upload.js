@@ -9,7 +9,15 @@ $(document).ready(function () {
         acceptedFiles: "video/*",
     })
 
+    let statusBtn = $('#status-btn')
+
+    // Prevent user from going to a different page while uploading.
+    dropzone.on("addedfile", function () {
+        statusBtn.prop('disabled', true)
+    })
+
+    // Redirect user to upload status after videos have been uploaded.
     dropzone.on("queuecomplete", function () {
-        alert("All files have uploaded ")
+        redirectToUrl(statusBtn.attr('href'))
     })
 })

@@ -7,6 +7,9 @@
         <form id="upload" action="{% url 'core:upload' %}" class="dropzone" enctype="multipart/form-data">
             {% csrf_token %}
         </form>
+        <a id="status-btn" href="{% url 'core:upload_status' %}" class="btn btn-primary my-3">
+            Check upload status
+        </a>
     </div>
 {% endblock %}
 
