@@ -1,7 +1,7 @@
 {% load static %}
 
 {% for video in videos %}
-    <div class="video-list card flex-row flex-wrap my-3">
+    <div class="video-list card flex-row flex-wrap my-3" data-url="{{ video.url }}">
         {% if video.status == strings.Constant.READY %}
             <div class="card-header border-0 px-1">
                 <img class="thumbnail rounded" src="{{ video.get_thumbnail_public_url }}" alt="thumbnail">
@@ -10,7 +10,7 @@
         <div class="card-block px-1">
             <h5 class="card-title">{{ video.name }}</h5>
             {% if video.description != None and video.description != '' %}
-                <p class="card-text">{{ video.description }}</p>
+                <p class="card-text mb-1">{{ video.description }}</p>
             {% endif %}
 
             <a href="/video/{{ video.url }}/" class="btn btn-primary my-2 mr-2
@@ -18,6 +18,13 @@
 
             {% if page == strings.Page.UPLOAD_STATUS %}
                 <a href="/video/{{ video.url }}/edit/" class="btn btn-primary my-2">Edit</a>
+            {% endif %}
+
+            {% if page == strings.Page.UPLOAD_STATUS %}
+                <div class="card-footer w-100 font-italic px-0">
+                    <p class="d-inline">STATUS: </p>
+                    <p class="d-inline video-status"></p>
+                </div>
             {% endif %}
         </div>
     </div>

@@ -26,7 +26,7 @@ function submitCallback(data) {
     if (isStatusOk(data) === false) {
         displayFormErrors(data)
     } else {
-        if (videoStatus === 'REA') {
+        if (videoStatus === 'REA' && document.referrer.includes('/upload/status/') === false) {
             // Redirect to video page.
             let url = replaceUrl('edit', 'success')
             window.open(url, '_self')
