@@ -4,9 +4,7 @@
     <div class="video-list card flex-row flex-wrap my-3">
         {% if video.status == strings.Constant.READY %}
             <div class="card-header border-0 px-1">
-                {% if video.get_thumbnail_public_url != None %}
-                    <img class="thumbnail rounded" src="{{ video.get_thumbnail_public_url }}" alt="thumbnail">
-                {% endif %}
+                <img class="thumbnail rounded" src="{{ video.get_thumbnail_public_url }}" alt="thumbnail">
             </div>
         {% endif %}
         <div class="card-block px-1">
@@ -28,3 +26,4 @@
 {% endfor %}
 
 <script src="{% static 'js/video/video-list.js' %}"></script>
+<script src="{% static 'js/thumbnail/thumbnail.js' %}"></script>
