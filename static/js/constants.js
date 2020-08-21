@@ -1,3 +1,4 @@
+let heading = $('#heading')
 let video = $('#video')
 let title = $('#title')
 let description = $('#description')

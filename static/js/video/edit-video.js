@@ -26,8 +26,12 @@ function submitCallback(data) {
     if (isStatusOk(data) === false) {
         displayFormErrors(data)
     } else {
-        // Redirect to video page.
-        let url = replaceUrl('edit', 'success')
-        window.open(url,"_self")
+        if (videoStatus === 'REA' && document.referrer.includes('/upload/status/') === false) {
+            // Redirect to video page.
+            let url = replaceUrl('edit', 'success')
+            window.open(url, '_self')
+        } else {
+            window.open('/upload/status/', '_self')
+        }
     }
 }

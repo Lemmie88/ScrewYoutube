@@ -1,6 +1,9 @@
+import shutil
 import uuid
 
 from django.db import models
+from django.db.models.signals import pre_delete
+from django.dispatch import receiver
 
 from core.models import Video
 
@@ -40,3 +43,13 @@ class Thumbnail(models.Model):
 
     def __str__(self):
         return self.video.name + ' - ' + str(self.position)
+
+
+# noinspection PyUnusedLocal
+@receiver(pre_delete, sender=Thumbnail)
+def delete_thumbnail(sender, instance, **kwargs):
+    """
+    This function deletes the thumbnail folder in processing directory.
+    """
+    assert isinstance(instance, Thumbnail)
+    shutil.rmtree(instance.video.get_processing_dir(True))

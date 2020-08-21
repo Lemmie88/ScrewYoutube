@@ -3,7 +3,7 @@
 
 {% block body %}
     <div class="mx-auto max-width-650">
-        <h3>Edit Video</h3>
+        <h4>Edit Video</h4>
 
         <form id="edit-video-form" method="post">
             {% csrf_token %}
@@ -16,7 +16,7 @@
             <div class="form-group">
                 <label for="description">Description</label>
                 <textarea id="description" name="description" class="form-control"
-                          rows="3">{{ video.description }}</textarea>
+                          rows="3">{% if video.description != None %}{{ video.description }}{% endif %}</textarea>
             </div>
 
             <div class="d-flex">
@@ -28,5 +28,8 @@
 {% endblock %}
 
 {% block script %}
+    <script>
+        let videoStatus = '{{ video.status }}'
+    </script>
     <script src="{% static 'js/video/edit-video.js' %}"></script>
 {% endblock %}
