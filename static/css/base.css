@@ -3,6 +3,10 @@ h3 {
     margin-bottom: 1rem !important;
 }
 
+h4 {
+    margin-bottom: 1rem !important;
+}
+
 /* Min widths */
 .min-width-250 {
     min-width: 250px;
@@ -59,6 +63,32 @@ h3 {
 /* Video element */
 .video-js {
     max-width: 100%;
+}
+
+/* Video list card */
+.video-list {
+    padding: 1rem;
+}
+
+.video-list > .card-header {
+    padding: 0;
+}
+
+.video-list > .card-block > .card-title {
+    padding-top: 12px;
+}
+
+.video-list > .card-block > .card-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Thumbnail */
+.thumbnail {
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
 }
 
 /* Tag element */

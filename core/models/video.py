@@ -245,6 +245,13 @@ class Video(BaseModel):
         self.status = strings.Constant.READY
         self.save()
 
+    def get_thumbnail_public_url(self, position=1):
+        from .thumbnail import Thumbnail
+        try:
+            return Thumbnail.objects.get(video=self, position=position).public_url
+        except Thumbnail.DoesNotExist:
+            return None
+
     def get_processing_dir(self, thumbnails=False):
         """
         Get the directory that contains the video in HLS format and thumbnails.

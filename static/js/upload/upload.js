@@ -1,11 +1,15 @@
 Dropzone.autoDiscover = false
 
-let dropzone = new Dropzone('#upload', {
-    paramName: "file",
-    maxFilesize: null,
-    acceptedFiles: "video/*",
-})
+$(document).ready(function () {
+    document.title = 'Upload'
 
-dropzone.on("queuecomplete", function () {
-    alert("All files have uploaded ")
+    let dropzone = new Dropzone('#upload', {
+        paramName: "file",
+        maxFilesize: null,
+        acceptedFiles: "video/*",
+    })
+
+    dropzone.on("queuecomplete", function () {
+        alert("All files have uploaded ")
+    })
 })

@@ -23,7 +23,7 @@ function redirectToUrl(url, newTab=false) {
  * @param page Current page
  */
 function updateNavbar(page) {
-    $('.nav-link[href*="' + page + '"]').closest('.nav-item').addClass('active')
+    $('.nav-link[href="/' + page + '/"]').closest('.nav-item').addClass('active')
 }
 
 /**

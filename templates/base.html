@@ -15,14 +15,6 @@
     {% block head %} {% endblock %}
 </head>
 <body>
-{% include 'navbar.html' %}
-{% include 'toast.html' %}
-{% include 'modal.html' %}
-
-<div class="container mt-5 mb-5">
-    {% block body %} {% endblock %}
-</div>
-
 <script src="{% static 'libraries/jquery.min.js' %}"></script>
 <script src="{% static 'libraries/popper.min.js' %}"></script>
 <script src="{% static 'libraries/cookie.js' %}"></script>
@@ -31,10 +23,18 @@
 <script src="{% static 'libraries/videojs/js/video.min.js' %}"></script>
 <!-- Dropzone -->
 <script src="{% static 'libraries/dropzone/dropzone.js' %}"></script>
+
+{% include 'navbar.html' %}
+{% include 'toast.html' %}
+{% include 'modal.html' %}
+
+<div class="container mt-5 mb-5">
+    {% block body %} {% endblock %}
+</div>
+
 <script src="{% static 'js/form.js' %}"></script>
 <script src="{% static 'js/constants.js' %}"></script>
 <script src="{% static 'js/helpers.js' %}"></script>
-
 <script>
     let DEBUG = '{{ debug }}'
     toast('{{ toast_title }}', '{{ toast_message }}')
