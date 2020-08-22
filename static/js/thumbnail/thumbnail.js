@@ -25,7 +25,7 @@ function regexThumbnail(src) {
  * This function changes the thumbnail between position 1 to 9.
  * @param overridePosition If this is not null, the thumbnail position is overrode.
  */
-function changeThumbnail(overridePosition=null) {
+function changeThumbnail(overridePosition = null) {
     let src = thumbnail.attr('src')
     let [url, position, extension] = regexThumbnail(src)
 

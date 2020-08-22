@@ -2,12 +2,15 @@
 {% load static %}
 
 {% block body %}
-    <div class="mx-auto max-width-700">
-        <h4 id="heading">Tag: {{ tag.name }}</h4>
-        {% include 'video/video-list.html' %}
-    </div>
+    {% include 'heading.html' %}
+
+    {% include 'video/video-grid.html' %}
+    {% include 'video/video-list.html' %}
 {% endblock %}
 
 {% block script %}
+    <script>
+        updateHeading('Tag: {{ tag.name }}')
+    </script>
     <script src="{% static 'js/tag/tag.js' %}"></script>
 {% endblock %}

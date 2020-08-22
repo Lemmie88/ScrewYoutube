@@ -1,9 +1,13 @@
 $(document).ready(function () {
+    let toggleListView = $('#toggle-list-view')
+
     resizeThumbnail()
     $(window).on('resize', resizeThumbnail)
+    toggleListView.on('click', resizeThumbnail)
 
     resizeCardBlock()
     $(window).on('resize', resizeCardBlock)
+    toggleListView.on('click', resizeCardBlock)
 })
 
 /**

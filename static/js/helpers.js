@@ -1,46 +1,19 @@
 /**
- * This function redirects the user to the index page.
- */
-function redirectToIndex() {
-    window.open('/',"_self")
-}
-
-/**
- * This function redirects user to the selected url.
- * @param url Url to redirect user to
- * @param newTab If true, the user will be redirected to a new tab
- */
-function redirectToUrl(url, newTab=false) {
-    if (newTab) {
-        window.open(url,"_blank")
-        return
-    }
-    window.open(url,"_self")
-}
-
-/**
- * This function redirects the user to the video page.
- * @param url Video URL
- */
-function redirectToVideo(url) {
-    window.open('/video/' + url + '/',"_self")
-}
-
-/**
- * This function redirects the user to the edit video page.
- * @param url Video URL
- */
-function redirectToEditVideo(url) {
-    window.open('/video/' + url + '/edit/',"_self")
-}
-
-
-/**
  * This function updates the navbar by checking the page against the href attribute and add the "active" class.
  * @param page Current page
  */
 function updateNavbar(page) {
     $('.nav-link[href="/' + page + '/"]').closest('.nav-item').addClass('active')
+}
+
+/**
+ * This function updates the heading.
+ * @param title
+ */
+function updateHeading(title=null) {
+    if (heading !== null) {
+        heading.text(title)
+    }
 }
 
 /**
@@ -56,12 +29,16 @@ function toast(title = 'Message', message = '', duration = 5000) {
 
     let toast = $('.toast')
 
-    // Set the height of the toast wrapper.
-    // $('.toast-wrapper').height(window.outerHeight - $('nav').outerHeight())
-
     // Set the title and message.
     toast.find('strong').text(title)
     toast.find('.toast-body').text(message)
+
+    // Show and hide toast container accordingly.
+    let toastContainer = $('.toast-container')
+    toastContainer.show()
+    toast.on('hidden.bs.toast', function () {
+        toastContainer.hide()
+    })
 
     toast.toast({delay: duration})
     toast.toast('show')
