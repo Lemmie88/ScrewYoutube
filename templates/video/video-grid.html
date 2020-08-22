@@ -3,7 +3,8 @@
 <div class="row">
     {% for video in videos %}
         <div class="col-sm-12 col-md-4 col-lg-3 p-1">
-            <div class="video-grid card p-0" onclick="redirectToVideo('{{ video.url }}')">
+            <div class="video-grid card p-0 {% if video.is_ready %}pointer{% endif %}"
+                 {% if video.is_ready %}onclick="redirectToVideo('{{ video.url }}')"{% endif %}>
                 <img class="card-img-top thumbnail rounded" src="{{ video.get_thumbnail_public_url }}" alt="thumbnail">
                 <div class="card-body p-2">
                     <h5 class="card-title">{{ video.name }}</h5>

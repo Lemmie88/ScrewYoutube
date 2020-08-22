@@ -2,9 +2,9 @@
 
 <div class="mx-auto max-width-700">
     {% for video in videos %}
-        <div class="video-list card flex-row flex-wrap my-3 {% if video.status == strings.Constant.READY %}pointer{% endif %}"
-             onclick="redirectToVideo('{{ video.url }}')" data-url="{{ video.url }}">
-            {% if video.status == strings.Constant.READY %}
+        <div class="video-list card flex-row flex-wrap my-3 {% if video.is_ready %}pointer{% endif %}"
+             {% if video.is_ready %}onclick="redirectToVideo('{{ video.url }}')" {% endif %} data-url="{{ video.url }}">
+            {% if video.is_ready %}
                 <div class="card-header border-0 px-1">
                     <img class="thumbnail rounded" src="{{ video.get_thumbnail_public_url }}" alt="thumbnail">
                 </div>
@@ -14,17 +14,14 @@
                 {% if video.description != None and video.description != '' %}
                     <p class="card-text mb-1">{{ video.description }}</p>
                 {% endif %}
-                <p class="card-text mb-1">ergeo iergo erjg eoirgjoerjg eorjgoerjg ioergjerogjerogji eoirgj erogi erigj
-                    erjig joegj iegjiergjoergjioerjgio eriog joerjiog ejiorgji oejoig jeiorgj ioejgio eijog </p>
 
                 {% if page == strings.Page.UPLOAD_STATUS %}
-                    <a href="/video/{{ video.url }}/edit/" class="btn btn-primary my-2">Edit</a>
-                {% endif %}
-
-                {% if page == strings.Page.UPLOAD_STATUS %}
-                    <div class="card-footer w-100 font-italic px-0">
-                        <p class="d-inline">STATUS: </p>
-                        <p class="d-inline video-status"></p>
+                    <div class="d-flex my-2">
+                        <div class="align-self-center font-italic">
+                            <p class="d-inline">STATUS: </p>
+                            <p class="d-inline video-status"></p>
+                        </div>
+                        <a href="/video/{{ video.url }}/edit/" class="btn btn-primary ml-auto">Edit</a>
                     </div>
                 {% endif %}
             </div>

@@ -79,8 +79,8 @@ h4 {
 }
 
 .video-list > .card-header > .thumbnail {
-    height: 200px;
-    width: 200px;
+    height: 150px;
+    width: 150px;
     object-fit: cover;
 }
 
@@ -93,6 +93,7 @@ h4 {
 }
 
 .video-list > .card-block > .card-text {
+    font-size: 1rem;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -106,7 +107,6 @@ h4 {
 /* Video grid */
 .video-grid {
     height: 100%;
-    cursor: pointer;
 }
 
 .video-grid > .card-body > .card-title {

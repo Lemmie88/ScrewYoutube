@@ -17,11 +17,11 @@ def process_video():
     while True:
         while Video.objects.filter(status=strings.Constant.NEW).exists():
             for video in Video.objects.filter(status=strings.Constant.NEW):
-                video.is_processing()
+                video.processing()
                 video.update_video_duration()
                 video.generate_thumbnails()
                 video.convert_to_hls()
-                video.is_uploading()
+                video.uploading()
 
         time.sleep(TIMEOUT)
 
@@ -38,7 +38,7 @@ def upload_video():
                 video.upload_hls_video()
                 video.upload_thumbnails()
                 video.delete_temp_files()
-                video.is_ready()
+                video.ready()
 
         time.sleep(TIMEOUT)
 
