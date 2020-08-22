@@ -45,6 +45,7 @@ function changeThumbnail(overridePosition=null) {
  */
 function onThumbnailHover() {
     thumbnail = $(this)
+    changeThumbnail()
     intervalId = setInterval(changeThumbnail, 1000)
 }
 

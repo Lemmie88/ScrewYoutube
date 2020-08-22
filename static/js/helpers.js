@@ -19,6 +19,23 @@ function redirectToUrl(url, newTab=false) {
 }
 
 /**
+ * This function redirects the user to the video page.
+ * @param url Video URL
+ */
+function redirectToVideo(url) {
+    window.open('/video/' + url + '/',"_self")
+}
+
+/**
+ * This function redirects the user to the edit video page.
+ * @param url Video URL
+ */
+function redirectToEditVideo(url) {
+    window.open('/video/' + url + '/edit/',"_self")
+}
+
+
+/**
  * This function updates the navbar by checking the page against the href attribute and add the "active" class.
  * @param page Current page
  */

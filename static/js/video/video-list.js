@@ -17,8 +17,8 @@ function resizeThumbnail() {
         thumbnail.css('height', 'auto')
         thumbnail.css('max-height', '300px')
     } else {
-        thumbnail.width(200)
-        thumbnail.height(200)
+        thumbnail.css('width', '')
+        thumbnail.css('height', '')
         thumbnail.css('max-height', '')
     }
 }
