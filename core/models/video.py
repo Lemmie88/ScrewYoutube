@@ -225,26 +225,32 @@ class Video(BaseModel):
         except Tag.DoesNotExist:
             pass
 
-    def is_processing(self):
+    def processing(self):
         """
         This function changes the status of the video to processing.
         """
         self.status = strings.Constant.PROCESSING
         self.save()
 
-    def is_uploading(self):
+    def uploading(self):
         """
         This function changes the status of the video to uploading.
         """
         self.status = strings.Constant.UPLOADING
         self.save()
 
-    def is_ready(self):
+    def ready(self):
         """
         This function changes the status of the video to ready.
         """
         self.status = strings.Constant.READY
         self.save()
+
+    def is_ready(self) -> bool:
+        """
+        This function checks if video is ready.
+        """
+        return self.status == strings.Constant.READY
 
     def get_thumbnail_public_url(self, position=1):
         from .thumbnail import Thumbnail

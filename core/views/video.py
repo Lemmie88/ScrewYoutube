@@ -11,8 +11,10 @@ def videos(request):
     """
     This function renders the videos page.
     """
+    _videos = Video.objects.filter(status=strings.Constant.READY)
     context = get_context(strings.Page.VIDEOS)
-    return render(request, 'base.html', context)
+    context.update({'videos': _videos})
+    return render(request, 'video/videos.html', context)
 
 
 def video(request, url, action=None):

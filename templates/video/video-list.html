@@ -1,36 +1,45 @@
 {% load static %}
 
-{% for video in videos %}
-    <div class="video-list card flex-row flex-wrap my-3" data-url="{{ video.url }}">
-        {% if video.status == strings.Constant.READY %}
-            <div class="card-header border-0 px-1">
-                <img class="thumbnail rounded" src="{{ video.get_thumbnail_public_url }}" alt="thumbnail">
-            </div>
-        {% endif %}
-        <div class="card-block px-1">
-            <h5 class="card-title">{{ video.name }}</h5>
-            {% if video.description != None and video.description != '' %}
-                <p class="card-text mb-1">{{ video.description }}</p>
-            {% endif %}
-
-            <a href="/video/{{ video.url }}/" class="btn btn-primary my-2 mr-2
-            {% if video.status != strings.Constant.READY %}disabled{% endif %}">Go to video</a>
-
-            {% if page == strings.Page.UPLOAD_STATUS %}
-                <a href="/video/{{ video.url }}/edit/" class="btn btn-primary my-2">Edit</a>
-            {% endif %}
-
-            {% if page == strings.Page.UPLOAD_STATUS %}
-                <div class="card-footer w-100 font-italic px-0">
-                    <p class="d-inline">STATUS: </p>
-                    <p class="d-inline video-status"></p>
+<div id="list-view" class="mx-auto max-width-700">
+    {% for video in videos %}
+        <div class="video-list card flex-row flex-wrap my-3 {% if video.is_ready %}pointer{% endif %}"
+             {% if video.is_ready %}onclick="redirectToVideo('{{ video.url }}')" {% endif %} data-url="{{ video.url }}">
+            {% if video.is_ready %}
+                <div class="card-header border-0 px-1">
+                    <img class="thumbnail rounded" src="{{ video.get_thumbnail_public_url }}" alt="thumbnail">
                 </div>
             {% endif %}
+            <div class="card-block px-1">
+                <h5 class="card-title">{{ video.name }}</h5>
+                {% if video.description != None and video.description != '' %}
+                    <p class="card-text mb-1">{{ video.description }}</p>
+                {% endif %}
+
+                {% if page == strings.Page.UPLOAD_STATUS %}
+                    <div class="d-flex my-2">
+                        <div class="align-self-center font-italic">
+                            <p class="d-inline">STATUS: </p>
+                            <p class="d-inline video-status"></p>
+                        </div>
+                        <a href="/video/{{ video.url }}/edit/" class="btn btn-primary ml-auto">Edit</a>
+                    </div>
+                {% endif %}
+            </div>
         </div>
-    </div>
-{% empty %}
-    <h5 id="no-videos" class="text-center">There are no videos found.</h5>
-{% endfor %}
+    {% empty %}
+        <h5 class="no-videos text-center">There are no videos found.</h5>
+    {% endfor %}
+
+    {# This allows the description to take up 4 lines instead of 2 lines. #}
+    {% if page != strings.Page.UPLOAD_STATUS %}
+        <!--suppress CssUnknownProperty -->
+        <style>
+            .video-list > .card-block > .card-text {
+                max-height: 85px;
+                -webkit-line-clamp: 4;
+            }
+        </style>
+    {% endif %}
+</div>
 
 <script src="{% static 'js/video/video-list.js' %}"></script>
-<script src="{% static 'js/thumbnail/thumbnail.js' %}"></script>

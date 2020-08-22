@@ -7,10 +7,3 @@
     {% include 'video/video-grid.html' %}
     {% include 'video/video-list.html' %}
 {% endblock %}
-
-{% block script %}
-    <script>
-        updateHeading('Tag: {{ tag.name }}')
-    </script>
-    <script src="{% static 'js/tag/tag.js' %}"></script>
-{% endblock %}

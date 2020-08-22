@@ -1,0 +1,22 @@
+{% load static %}
+
+<div id="grid-view" class="row">
+    {% for video in videos %}
+        <div class="col-sm-12 col-md-4 col-lg-3 p-1">
+            <div class="video-grid card p-0 {% if video.is_ready %}pointer{% endif %}"
+                 {% if video.is_ready %}onclick="redirectToVideo('{{ video.url }}')"{% endif %}>
+                <img class="card-img-top thumbnail rounded" src="{{ video.get_thumbnail_public_url }}" alt="thumbnail">
+                <div class="card-body p-2">
+                    <h5 class="card-title">{{ video.name }}</h5>
+                    {% if video.description != None and video.description != '' %}
+                        <p class="card-text">{{ video.description }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <h5 class="no-videos text-center">There are no videos found.</h5>
+    {% endfor %}
+</div>
+
+<script src="{% static 'js/video/video-grid.js' %}"></script>

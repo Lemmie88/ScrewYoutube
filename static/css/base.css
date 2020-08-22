@@ -7,6 +7,10 @@ h4 {
     margin-bottom: 1rem !important;
 }
 
+.pointer {
+    cursor: pointer;
+}
+
 /* Min widths */
 .min-width-250 {
     min-width: 250px;
@@ -29,6 +33,10 @@ h4 {
     max-width: 960px;
 }
 
+.display-none {
+    display: none;
+}
+
 /* Form elements */
 .invalid-feedback {
     font-size: 100% !important;
@@ -41,6 +49,7 @@ h4 {
     right: 3rem;
     min-width: 300px;
     z-index: 1000;
+    display: none;
 }
 
 .toast {
@@ -74,25 +83,53 @@ h4 {
     padding: 0;
 }
 
-.video-list > .card-block > .card-title {
-    padding-top: 12px;
+.video-list > .card-header > .thumbnail {
+    height: 150px;
+    width: 150px;
+    object-fit: cover;
 }
 
-.video-list > .card-block > .card-text {
+.video-list > .card-block > .card-title {
+    font-size: 1.2rem;
+    padding-top: 12px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-#no-videos {
-    margin-top: 7rem;
+.video-list > .card-block > .card-text {
+    font-size: 1rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    line-height: 21px;
+    max-height: 48px;
+    /*noinspection CssUnknownProperty*/
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
-/* Thumbnail */
-.thumbnail {
-    height: 200px;
-    width: 200px;
-    object-fit: cover;
+/* Video grid */
+.video-grid {
+    height: 100%;
+}
+
+.video-grid > .card-body > .card-title {
+    font-size: 1.2rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.video-grid > .card-body > .card-text {
+    font-size: 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.no-videos {
+    margin-top: 7rem;
 }
 
 /* Tag element */

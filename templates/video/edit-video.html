@@ -20,8 +20,12 @@
             </div>
 
             <div class="d-flex">
-                <button type="button" class="btn btn-outline-danger" onclick="clickDelete()">Delete</button>
-                <button type="button" class="btn btn-primary ml-auto" onclick="submitForm()">Submit</button>
+                <button type="button" class="btn btn-primary
+                        {% if video.is_ready == false %}disabled{% endif %}"
+                        {% if video.is_ready %}onclick="redirectToVideo('{{ video.url }}')"{% endif %}>Go to video
+                </button>
+                <button type="button" class="btn btn-outline-danger ml-auto mx-2" onclick="clickDelete()">Delete</button>
+                <button type="button" class="btn btn-primary" onclick="submitForm()">Submit</button>
             </div>
         </form>
     </div>

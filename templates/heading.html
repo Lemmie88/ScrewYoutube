@@ -1,0 +1,18 @@
+{% load static %}
+<div class="mx-auto max-width-700">
+    <div class="d-flex mb-3">
+        <h4 id="heading" class="m-0"></h4>
+        <div class="ml-auto align-self-center">
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <label id="toggle-grid-view" class="btn btn-primary" onclick="setGridView()">
+                    <input type="radio" name="options" autocomplete="off"> Grid
+                </label>
+                <label id="toggle-list-view" class="btn btn-primary" onclick="setListView()">
+                    <input type="radio" name="options" autocomplete="off"> List
+                </label>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'js/heading.js' %}"></script>
