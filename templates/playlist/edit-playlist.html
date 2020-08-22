@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+    <div class="mx-auto max-width-650">
+        <h4>Edit Playlist</h4>
+
+        {% include 'playlist/playlist-form.html' %}
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'js/playlist/edit-playlist.js' %}"></script>
+{% endblock %}

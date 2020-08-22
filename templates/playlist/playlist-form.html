@@ -1,0 +1,27 @@
+{% load static %}
+<form id="playlist-form" method="post">
+    {% csrf_token %}
+
+    <div class="form-group">
+        <label for="title">Title</label>
+        <input id="title" name="title" type="text" class="form-control" value="{{ playlist.name }}">
+    </div>
+
+    <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" name="description" class="form-control"
+                  rows="3">{% if playlist.description != None %}{{ playlist.description }}{% endif %}</textarea>
+    </div>
+
+    <div class="d-flex">
+        {% if page != strings.Page.ADD_PLAYLIST %}
+            <button type="button" class="btn btn-primary" onclick="">Go to playlist</button>
+            <button type="button" class="btn btn-outline-danger ml-auto mx-2" onclick="clickDelete()">Delete</button>
+        {% endif %}
+        <button type="button" class="btn btn-primary {% if page == strings.Page.ADD_PLAYLIST %}ml-auto{% endif %}"
+                onclick="submitForm('{{ page }}')">Submit
+        </button>
+    </div>
+</form>
+
+<script src="{% static 'js/playlist/playlist-form.js' %}"></script>

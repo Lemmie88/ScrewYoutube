@@ -16,6 +16,9 @@ urlpatterns = [
     path('tags/', tags, name='tags'),
     path('tag/<str:url>/', tag, name='tag'),
 
+    path('playlists/add/', add_playlist, name='add_playlist'),
+    path('playlist/<str:url>/edit/', edit_playlist, name='edit_playlist'),
+
     path('upload/', upload, name='upload'),
     path('upload/status/', upload_status, name='upload_status'),
 ]

@@ -15,7 +15,7 @@ from core import strings, scheduler
 from core.helpers.helper import generate_url_code
 from core.helpers.storage import upload_file, delete_folder
 from core.helpers.form import Form
-from core.models import BaseModel, Series, Playlist, Tag
+from core.models import BaseModel, Series, Tag
 
 VIDEO_DIR = os.path.join(settings.TEMP_ROOT, 'videos')
 ORIGINAL_DIR = os.path.join(VIDEO_DIR, 'original')
@@ -71,12 +71,6 @@ class Video(BaseModel):
         verbose_name='Series',
         on_delete=models.SET_NULL,
         null=True,
-        blank=True
-    )
-
-    playlist = models.ManyToManyField(
-        to=Playlist,
-        verbose_name='Playlist',
         blank=True
     )
 
