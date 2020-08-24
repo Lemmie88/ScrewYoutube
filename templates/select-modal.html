@@ -12,16 +12,22 @@
             </div>
             <div id="modal-body" class="modal-body">
                 <form class="select-form">
+
                     {# Get object type. #}
                     {% is_playlist objects as is_playlist_type %}
+                    {% is_video objects as is_video_type %}
 
                     {% if is_playlist_type %}
-                         <input name="video_url" value="{{ video.url }}" type="hidden">
+                        <input name="video_url" value="{{ video.url }}" type="hidden">
                     {% endif %}
 
                     {% for object in objects %}
                         {% if is_playlist_type %}
                             {% is_video_in_playlist object video as checked %}
+                        {% endif %}
+
+                        {% if page != strings.Page.ADD_PLAYLIST and is_video_type %}
+                            {% is_video_in_playlist playlist object as checked %}
                         {% endif %}
 
                         <div class="form-check">

@@ -1,6 +1,6 @@
 from django import template
 
-from core.models import Playlist
+from core.models import *
 
 register = template.Library()
 
@@ -10,13 +10,29 @@ def is_playlist(objects):
     """
     This function checks whether the objects is an instance of playlist.
     """
-    return isinstance(objects[0], Playlist)
+    # noinspection PyBroadException
+    try:
+        return isinstance(objects[0], Playlist)
+    except Exception:
+        return False
 
 
 @register.simple_tag
-def is_video_in_playlist(playlist, video):
+def is_video(objects):
+    """
+    This function checks whether the objects is an instance of playlist.
+    """
+    # noinspection PyBroadException
+    try:
+        return isinstance(objects[0], Video)
+    except Exception:
+        return False
+
+
+@register.simple_tag
+def is_video_in_playlist(_playlist, _video):
     """
     This tag checks whether the playlist has the video.
     """
-    assert isinstance(playlist, Playlist)
-    return playlist.have_video(video)
+    assert isinstance(_playlist, Playlist)
+    return _playlist.have_video(_video)

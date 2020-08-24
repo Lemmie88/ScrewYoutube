@@ -21,3 +21,15 @@ function addPlaylistCallback(data) {
         // TODO: Redirect to playlists page.
     }
 }
+
+/**
+ * This function finds all the checked checkboxes and adds the video IDs into a list which is added into a hidden input.
+ */
+function addVideoToPlaylist() {
+    let videos = $('#video-modal').find('.form-check-input:checked')
+    let list = []
+    for (let i = 0; i < videos.length; i++) {
+        list.push($(videos[i]).attr('id'))
+    }
+    $('#playlist-form').find('input[name="videos"]').val(list)
+}

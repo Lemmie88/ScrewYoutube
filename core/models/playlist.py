@@ -147,9 +147,6 @@ class PlaylistVideo(models.Model):
         if self.position is None:
             self.position = self.playlist.get_latest_position() + 1
 
-        print(self.position)
-        print(self.video)
-
     def save(self, *args, **kwargs):
         self.full_clean()
         return super(PlaylistVideo, self).save(*args, **kwargs)
