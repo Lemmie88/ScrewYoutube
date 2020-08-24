@@ -5,14 +5,29 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 id="modal-title" class="modal-title">{{ modal_title }}</h5>
+                <h5 class="modal-title">{{ modal_title }}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div id="modal-body" class="modal-body">
-                <form class="select-form">
+            <div class="modal-body">
+                <form>
+                    <div class="form-check-inline w-75">
+                        <!--suppress HtmlFormInputWithoutLabel -->
+                        <input id="{{ modal_id }}-search" class="form-control" list="{{ modal_id }}-search-list"
+                               type="text" placeholder="Search" autocomplete="off">
+                    </div>
+                    <button type="button" class="btn btn-primary add-btn">Add</button>
+                </form>
+                <datalist id="{{ modal_id }}-search-list">
+                    {% for object in objects %}
+                        <option value="{{ object.name }}">
+                    {% endfor %}
+                </datalist>
 
+                <hr class="w-100"/>
+
+                <form class="select-form" style="">
                     {# Get object type. #}
                     {% is_playlist objects as is_playlist_type %}
                     {% is_video objects as is_video_type %}
@@ -40,11 +55,32 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button id="modal-action" type="button" class="btn btn-primary" data-dismiss="modal"
-                        onclick="{{ submit }}">Okay
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="{{ submit }}">
+                    Okay
                 </button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    $('#{{ modal_id }}').find('.add-btn').click(search)
+
+    /**
+     * This function is activated when the add button is pressed, checks the relevant checkbox and scrolls the checkbox
+     * into view.
+     */
+    function search() {
+        let name = $('#{{ modal_id }}-search').val()
+        let label = $('#{{ modal_id }}').find('label:contains(' + name + ')')
+        let checkbox = label.closest('div').find('input')
+        checkbox.prop('checked', true);
+
+        $('#{{ modal_id }}-search').val('')
+
+        try {
+            document.getElementById(checkbox.attr('id')).scrollIntoView();
+        } catch (e) {}
+    }
+</script>

@@ -141,3 +141,9 @@ h4 {
     font-size: 1rem;
     cursor: pointer;
 }
+
+/* Select form in select modal */
+.select-form {
+    max-height: 350px;
+    overflow-y: auto;
+}
