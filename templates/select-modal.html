@@ -1,0 +1,44 @@
+{% load static %}
+{% load tags %}
+
+<div id="{{ modal_id }}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="modal-title" class="modal-title">{{ modal_title }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="modal-body" class="modal-body">
+                <form class="select-form">
+                    {# Get object type. #}
+                    {% is_playlist objects as is_playlist_type %}
+
+                    {% if is_playlist_type %}
+                         <input name="video_url" value="{{ video.url }}" type="hidden">
+                    {% endif %}
+
+                    {% for object in objects %}
+                        {% if is_playlist_type %}
+                            {% is_video_in_playlist object video as checked %}
+                        {% endif %}
+
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="{{ object.id }}"
+                                   name="{{ object.name }}"
+                                   {% if checked %}checked{% endif %}>
+                            <label class="form-check-label" for="{{ object.id }}">{{ object.name }}</label>
+                        </div>
+                    {% endfor %}
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-action" type="button" class="btn btn-primary" data-dismiss="modal"
+                        onclick="{{ submit }}">Okay
+                </button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

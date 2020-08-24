@@ -246,6 +246,17 @@ class Video(BaseModel):
         """
         return self.status == strings.Constant.READY
 
+    def get_playlists(self):
+        """
+        This functions gets a list of playlists that the video is in.
+        """
+        from core.models import PlaylistVideo
+        playlist_videos = PlaylistVideo.objects.filter(video=self)
+        videos = []
+        for playlist_video in playlist_videos:
+            videos.append(playlist_video.playlist)
+        return videos
+
     def get_thumbnail_public_url(self, position=1):
         from .thumbnail import Thumbnail
         try:

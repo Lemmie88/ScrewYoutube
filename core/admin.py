@@ -96,3 +96,20 @@ class VideoAdmin(SimpleHistoryAdmin):
 
 
 admin.site.register(Video, VideoAdmin)
+
+
+class PlaylistVideoAdmin(SimpleHistoryAdmin):
+    ordering = ['playlist']
+    search_fields = ['playlist']
+    readonly_fields = ('id',)
+    fieldsets = (
+        (None, {
+            'fields': ('playlist', 'video', 'position'),
+        }),
+        ('Readonly Details', {
+            'fields': ('id',),
+        }),
+    )
+
+
+admin.site.register(PlaylistVideo, PlaylistVideoAdmin)

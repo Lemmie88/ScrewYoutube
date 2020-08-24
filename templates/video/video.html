@@ -10,10 +10,18 @@
         {% if video.description != None %}
             <p id="description">{{ video.description }}</p>
         {% endif %}
-        <button type="button" class="btn btn-primary" onclick="editVideo()">Edit</button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#playlist-modal">
+            Add to playlist
+        </button>
+        <button type="button" class="btn btn-primary" onclick="redirectToEditVideo('{{ video.url }}')">Edit</button>
     </div>
+
+    {% include 'select-modal.html' with modal_id='playlist-modal' modal_title='Add to playlist' objects=playlists submit='addVideoToPlaylist()' %}
 {% endblock %}
 
 {% block script %}
+    <script>
+    const VIDEO_URL = '{{ video.url }}'
+    </script>
     <script src="{% static 'js/video/video.js' %}"></script>
 {% endblock %}

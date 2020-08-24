@@ -89,6 +89,17 @@ class Playlist(BaseModel):
         """
         PlaylistVideo.objects.filter(playlist=self).delete()
 
+    def have_video(self, video):
+        """
+        This function checks whether the playlist has a video.
+        """
+        try:
+            PlaylistVideo.objects.get(playlist=self, video=video)
+            return True
+
+        except PlaylistVideo.DoesNotExist:
+            return False
+
     def clean(self):
         # Generate unique url code.
         if self.url is '' or self.url is None:
@@ -123,15 +134,21 @@ class PlaylistVideo(models.Model):
     history = HistoricalRecords()
 
     class Meta:
+        verbose_name = 'Playlist Video'
+        verbose_name_plural = 'Playlist Video'
+
         ordering = ["playlist__name", "position"]
         constraints = [
             models.UniqueConstraint(fields=['playlist', 'video'], name='unique_playlist_video'),
-            models.UniqueConstraint(fields=['video', 'position'], name='unique_video_position')
+            models.UniqueConstraint(fields=['playlist', 'position'], name='unique_playlist_position')
         ]
 
     def clean(self):
         if self.position is None:
             self.position = self.playlist.get_latest_position() + 1
+
+        print(self.position)
+        print(self.video)
 
     def save(self, *args, **kwargs):
         self.full_clean()

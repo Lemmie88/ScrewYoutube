@@ -14,7 +14,10 @@ function calculateVideoHeight() {
     video.closest('div').height(video.height())
 }
 
-function editVideo() {
-    let url = window.location.pathname + 'edit/'
-    redirectToUrl(url)
+/**
+ * This function sends the playlist data to the API.
+ */
+function addVideoToPlaylist() {
+    let data = $('#playlist-modal').find('form').serialize()
+    post('/video/add-playlist/', reloadCallback, data)
 }

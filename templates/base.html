@@ -39,7 +39,9 @@
 <script src="{% static 'js/thumbnail/thumbnail.js' %}"></script>
 
 <script>
-    let DEBUG = '{{ debug }}'
+    const DEBUG = '{{ debug }}'
+    const PAGE = '{{ page }}'
+
     toast('{{ toast_title }}', '{{ toast_message }}')
     updateNavbar('{{ page }}')
 </script>
