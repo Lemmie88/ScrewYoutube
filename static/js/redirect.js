@@ -19,6 +19,13 @@ function redirectToUrl(url, newTab=false) {
 }
 
 /**
+ * This function redirects the user to the videos page.
+ */
+function redirectToVideos() {
+    window.open('/videos/',"_self")
+}
+
+/**
  * This function redirects the user to the video page.
  * @param url Video URL
  */
@@ -32,4 +39,19 @@ function redirectToVideo(url) {
  */
 function redirectToEditVideo(url) {
     window.open('/video/' + url + '/edit/',"_self")
+}
+
+/**
+ * This function redirects the user to the playlists page.
+ */
+function redirectToPlaylists() {
+    window.open('/playlists/',"_self")
+}
+
+/**
+ * This function redirects the user to the playlist page.
+ * @param url Playlist URL
+ */
+function redirectToPlaylist(url) {
+    window.open('/playlist/' + url + '/',"_self")
 }

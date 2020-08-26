@@ -2,13 +2,19 @@ $(document).ready(function () {
     document.title = 'Edit: ' + title.val()
 })
 
+/**
+ * This function opens the modal which warns the user.
+ */
 function clickDelete() {
     modal('Are you sure?', 'This video will be deleted permanently.', 'Delete', deleteVideo)
 }
 
+/**
+ * This function sends the data to delete the video.
+ */
 function deleteVideo() {
     let url = replaceUrl('edit', 'delete')
-    post(url, redirectToIndex)
+    post(url, redirectToVideos)
 }
 
 /**

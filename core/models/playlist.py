@@ -6,6 +6,7 @@ from django.db.models.signals import post_delete
 from django.dispatch import receiver
 from simple_history.models import HistoricalRecords
 
+from core.helpers.form import Form
 from core.helpers.helper import generate_url_code
 from core.models import Video
 from core.models.base import BaseModel
@@ -21,6 +22,25 @@ class Playlist(BaseModel):
     class Meta:
         ordering = ["name"]
         get_latest_by = ["-date_modified"]
+
+    def update_details(self, cleaned_data):
+        """
+        This function updates the playlist details from the form.
+        """
+        self.name = Form.get_title(cleaned_data)
+        self.description = Form.get_description(cleaned_data)
+        self.save()
+
+    def get_thumbnail_url(self):
+        """
+        This function returns the thumbnail URL of the first video.
+        """
+        videos = self.get_videos()
+        if len(videos) == 0:
+            return 'http://placehold.it/100'
+
+        else:
+            return videos[0].get_thumbnail_public_url()
 
     def get_videos(self):
         """

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+    {% include 'heading.html' with href=edit_url %}
+
+    {% include 'video/video-grid.html' %}
+    {% include 'video/video-list.html' %}
+{% endblock %}
+
+{% block script %}
+    <script>
+        updateHeading('Playlist: {{ playlist.name }}')
+    </script>
+    <script src="{% static 'js/playlist/playlist.js' %}"></script>
+{% endblock %}
