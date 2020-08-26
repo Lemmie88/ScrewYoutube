@@ -1,7 +1,16 @@
 {% load static %}
-{#<div class="mx-auto max-width-700">#}
+
 <div class="d-flex mb-3">
+    {% if href %}
+        <a href="{{ href }}" class="text-white">
+    {% endif %}
+
     <h4 id="heading" class="m-0"></h4>
+
+    {% if href %}
+        </a>
+    {% endif %}
+
     <div class="ml-auto align-self-center">
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
             <label id="toggle-grid-view" class="btn btn-primary" onclick="setGridView()">
@@ -13,6 +22,6 @@
         </div>
     </div>
 </div>
-{#</div>#}
+
 
 <script src="{% static 'js/heading.js' %}"></script>

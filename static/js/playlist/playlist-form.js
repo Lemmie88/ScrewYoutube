@@ -1,3 +1,18 @@
+/**
+ * This function opens the modal which warns the user.
+ */
+function clickDelete() {
+    modal('Are you sure?', 'This playlist will be deleted permanently.', 'Delete', deletePlaylist)
+}
+
+/**
+ * This function sends the data to delete the playlist.
+ */
+function deletePlaylist() {
+    let url = replaceUrl('edit', 'delete')
+    post(url, redirectToPlaylists)
+}
+
 function submitForm() {
     let form = $('#playlist-form')
 
@@ -20,6 +35,7 @@ function submitForm() {
 }
 
 /**
+ * This function is called when the user clicks submit in the add playlist page.
  * This function displays error if there are errors, otherwise, it will redirect to playlist page.
  * @param data Data from API
  */
@@ -27,16 +43,20 @@ function addPlaylistCallback(data) {
     if (isStatusOk(data) === false) {
         displayFormErrors(data)
     } else {
-        // TODO: Redirect to playlist page.
+        redirectToPlaylist(data['url'])
     }
 }
 
+/**
+ * This function is called when the user clicks submit in the edit playlist page.
+ * This function displays error if there are errors, otherwise, it will redirect to playlist page.
+ * @param data Data from API
+ */
 function editPlaylistCallback(data) {
     if (isStatusOk(data) === false) {
         displayFormErrors(data)
     } else {
-        // TODO: Redirect to playlist page.
-        reloadCallback()
+        redirectToPlaylist(data['url'])
     }
 }
 

@@ -17,9 +17,12 @@ urlpatterns = [
     path('tags/', tags, name='tags'),
     path('tag/<str:url>/', tag, name='tag'),
 
+    path('playlists/', playlists, name='playlists'),
     path('playlists/add/', add_playlist, name='add_playlist'),
     path('playlists/add-video/', add_videos_to_playlist, name='add_videos_to_playlist'),
+    path('playlist/<str:url>/', playlist, name='playlist'),
     path('playlist/<str:url>/edit/', edit_playlist, name='edit_playlist'),
+    path('playlist/<str:url>/delete/', delete_playlist, name='delete_playlist'),
 
     path('upload/', upload, name='upload'),
     path('upload/status/', upload_status, name='upload_status'),

@@ -2,8 +2,13 @@ let thumbnail
 let intervalId
 
 $(document).ready(function () {
-    let thumbnail = $('.thumbnail')
-    thumbnail.hover(onThumbnailHover, offThumbnailHover)
+    if (PAGE !== 'playlists') {
+        let thumbnail = $('.thumbnail')
+        try {
+            thumbnail.hover(onThumbnailHover, offThumbnailHover)
+        } catch (e) {
+        }
+    }
 })
 
 /**

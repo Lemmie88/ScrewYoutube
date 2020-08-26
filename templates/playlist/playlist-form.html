@@ -17,12 +17,14 @@
     </div>
 
     <div class="d-flex">
-        <button type="button" class="btn btn-primary mr-2 px-2" data-toggle="modal" data-target="#video-modal">
-            Add videos
+        <button type="button" class="btn btn-primary mr-1 px-2" data-toggle="modal" data-target="#video-modal">
+            Select videos
         </button>
         {% if page != strings.Page.ADD_PLAYLIST %}
-            <button type="button" class="btn btn-primary px-2" onclick="">Go to playlist</button>
-            <button type="button" class="btn btn-outline-danger ml-auto mx-2 px-2" onclick="clickDelete()">Delete</button>
+            <button type="button" class="btn btn-primary px-2" onclick="redirectToPlaylist('{{ playlist.url }}')">
+                Go to playlist
+            </button>
+            <button type="button" class="btn btn-outline-danger ml-auto mx-1 px-2" onclick="clickDelete()">Delete</button>
         {% endif %}
         <button type="button" class="btn btn-primary px-2 {% if page == strings.Page.ADD_PLAYLIST %}ml-auto{% endif %}"
                 onclick="submitForm()">Submit
@@ -30,6 +32,6 @@
     </div>
 </form>
 
-{% include 'select-modal.html' with modal_id='video-modal' modal_title='Add videos' objects=videos submit='addVideoToPlaylist()' %}
+{% include 'select-modal.html' with modal_id='video-modal' modal_title='Select videos' objects=videos submit='addVideoToPlaylist()' %}
 
 <script src="{% static 'js/playlist/playlist-form.js' %}"></script>

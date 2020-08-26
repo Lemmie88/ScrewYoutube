@@ -1,9 +1,8 @@
 $(document).ready(function () {
-    let toggleListView = $('#toggle-list-view')
+    document.title = 'Playlists'
 
     resizeCardBlock()
     $(window).on('resize', resizeCardBlock)
-    toggleListView.on('click', resizeCardBlock)
 })
 
 /**
@@ -11,5 +10,5 @@ $(document).ready(function () {
  */
 function resizeCardBlock() {
     let padding = 8
-    $('.card-block').width($('.video-list').width() - $('.card-header').outerWidth() - padding)
+    $('.card-block').width($('.playlist-list').width() - $('.card-header').outerWidth() - padding)
 }
