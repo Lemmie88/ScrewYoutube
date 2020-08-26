@@ -33,7 +33,7 @@ def video(request, url, action=None):
     return render(request, 'video/video.html', context)
 
 
-def add_video_to_playlist(request):
+def add_video_to_playlists(request):
     """
     This function adds the video to the selected playlists.
     """
@@ -58,7 +58,7 @@ def add_video_to_playlist(request):
             assert isinstance(playlist, Playlist)
             playlist.delete_video(_video)
 
-        # Add video from playlists.
+        # Add video to playlists.
         for playlist in [x for x in new_playlists if x not in original_playlists]:
             assert isinstance(playlist, Playlist)
             playlist.add_video(_video)

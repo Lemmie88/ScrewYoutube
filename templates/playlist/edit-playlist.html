@@ -2,10 +2,15 @@
 {% load static %}
 
 {% block body %}
-    <div class="mx-auto max-width-650">
-        <h4>Edit Playlist</h4>
+    <h4 id="heading">Edit: {{ playlist.name }}</h4>
 
-        {% include 'playlist/playlist-form.html' %}
+    <div class="row">
+        <div class="col-sm-12 col-md-6">
+            {% include 'playlist/playlist-form.html' %}
+        </div>
+        <div class="col-sm-12 col-md-6" style="max-height: 500px; overflow-y: auto;">
+            {% include 'video/video-list.html' with videos=playlist.get_videos sortable=True %}
+        </div>
     </div>
 {% endblock %}
 

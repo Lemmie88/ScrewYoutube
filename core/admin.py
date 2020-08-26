@@ -87,7 +87,7 @@ class VideoAdmin(SimpleHistoryAdmin):
             'fields': BASE_FIELDS,
         }),
         ('Other Details', {
-            'fields': ('video', 'public_url', 'duration', 'status', 'link', 'series', 'playlist', 'tag'),
+            'fields': ('video', 'public_url', 'duration', 'status', 'link', 'series', 'tag'),
         }),
         ('Readonly Details', {
             'fields': BASE_READONLY_FIELDS,
