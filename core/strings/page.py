@@ -7,5 +7,10 @@ class Page:
     TAG = 'tag'
     EDIT_TAG = 'edit tag'
 
+    PLAYLISTS = 'playlists'
+    PLAYLIST = 'playlist'
+    ADD_PLAYLIST = 'add playlist'
+    EDIT_PLAYLIST = 'edit playlist'
+
     UPLOAD = 'upload'
     UPLOAD_STATUS = 'upload status'

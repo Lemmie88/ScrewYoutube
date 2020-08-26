@@ -1,0 +1,86 @@
+{% load static %}
+{% load tags %}
+
+<div id="{{ modal_id }}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ modal_title }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-check-inline w-75">
+                        <!--suppress HtmlFormInputWithoutLabel -->
+                        <input id="{{ modal_id }}-search" class="form-control" list="{{ modal_id }}-search-list"
+                               type="text" placeholder="Search" autocomplete="off">
+                    </div>
+                    <button type="button" class="btn btn-primary add-btn">Add</button>
+                </form>
+                <datalist id="{{ modal_id }}-search-list">
+                    {% for object in objects %}
+                        <option value="{{ object.name }}">
+                    {% endfor %}
+                </datalist>
+
+                <hr class="w-100"/>
+
+                <form class="select-form" style="">
+                    {# Get object type. #}
+                    {% is_playlist objects as is_playlist_type %}
+                    {% is_video objects as is_video_type %}
+
+                    {% if is_playlist_type %}
+                        <input name="video_url" value="{{ video.url }}" type="hidden">
+                    {% endif %}
+
+                    {% for object in objects %}
+                        {% if is_playlist_type %}
+                            {% is_video_in_playlist object video as checked %}
+                        {% endif %}
+
+                        {% if page != strings.Page.ADD_PLAYLIST and is_video_type %}
+                            {% is_video_in_playlist playlist object as checked %}
+                        {% endif %}
+
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="{{ object.id }}" data-url="{{ object.url }}"
+                                   name="{{ object.name }}"
+                                   {% if checked %}checked{% endif %}>
+                            <label class="form-check-label" for="{{ object.id }}">{{ object.name }}</label>
+                        </div>
+                    {% endfor %}
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="{{ submit }}">
+                    Okay
+                </button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#{{ modal_id }}').find('.add-btn').click(search)
+
+    /**
+     * This function is activated when the add button is pressed, checks the relevant checkbox and scrolls the checkbox
+     * into view.
+     */
+    function search() {
+        let name = $('#{{ modal_id }}-search').val()
+        let label = $('#{{ modal_id }}').find('label:contains(' + name + ')')
+        let checkbox = label.closest('div').find('input')
+        checkbox.prop('checked', true);
+
+        $('#{{ modal_id }}-search').val('')
+
+        try {
+            document.getElementById(checkbox.attr('id')).scrollIntoView();
+        } catch (e) {}
+    }
+</script>

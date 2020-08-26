@@ -34,7 +34,7 @@ class Thumbnail(models.Model):
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['video', 'position'], name='unique_position')
+            models.UniqueConstraint(fields=['video', 'position'], name='unique_thumbnail_position')
         ]
 
     def save(self, *args, **kwargs):

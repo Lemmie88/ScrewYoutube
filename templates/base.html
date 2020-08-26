@@ -23,6 +23,8 @@
 <script src="{% static 'libraries/videojs/js/video.min.js' %}"></script>
 <!-- Dropzone -->
 <script src="{% static 'libraries/dropzone/dropzone.js' %}"></script>
+<!-- SortableJS -->
+<script src="{% static 'libraries/sortable.js' %}"></script>
 
 {% include 'navbar.html' %}
 {% include 'toast.html' %}
@@ -39,7 +41,9 @@
 <script src="{% static 'js/thumbnail/thumbnail.js' %}"></script>
 
 <script>
-    let DEBUG = '{{ debug }}'
+    const DEBUG = '{{ debug }}'
+    const PAGE = '{{ page }}'
+
     toast('{{ toast_title }}', '{{ toast_message }}')
     updateNavbar('{{ page }}')
 </script>

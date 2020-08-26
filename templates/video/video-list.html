@@ -6,6 +6,9 @@
              {% if video.is_ready %}onclick="redirectToVideo('{{ video.url }}')" {% endif %} data-url="{{ video.url }}">
             {% if video.is_ready %}
                 <div class="card-header border-0 px-1">
+                    {% if sortable %}
+                        <span class="material-icons mr-2">reorder</span>
+                    {% endif %}
                     <img class="thumbnail rounded" src="{{ video.get_thumbnail_public_url }}" alt="thumbnail">
                 </div>
             {% endif %}
@@ -16,7 +19,7 @@
                 {% endif %}
 
                 {% if page == strings.Page.UPLOAD_STATUS %}
-                    <div class="d-flex my-2">
+                    <div class="d-flex mt-2">
                         <div class="align-self-center font-italic">
                             <p class="d-inline">STATUS: </p>
                             <p class="d-inline video-status"></p>
@@ -30,13 +33,19 @@
         <h5 class="no-videos text-center">There are no videos found.</h5>
     {% endfor %}
 
-    {# This allows the description to take up 4 lines instead of 2 lines. #}
+    {# Change thumbnail size depending on the page. #}
     {% if page != strings.Page.UPLOAD_STATUS %}
-        <!--suppress CssUnknownProperty -->
         <style>
-            .video-list > .card-block > .card-text {
-                max-height: 85px;
-                -webkit-line-clamp: 4;
+            .video-list > .card-header > .thumbnail {
+                height: 75px;
+                width: 75px;
+            }
+        </style>
+    {% else %}
+        <style>
+            .video-list > .card-header > .thumbnail {
+                height: 100px;
+                width: 100px;
             }
         </style>
     {% endif %}

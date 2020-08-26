@@ -73,3 +73,10 @@ function replaceUrl(oldString, newString) {
     let url = window.location.pathname
     return url.replace(oldString + '/', newString + '/')
 }
+
+/**
+ * This function reloads the page.
+ */
+function reloadCallback() {
+    location.reload()
+}
